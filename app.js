@@ -1,3 +1,5 @@
+
+// Array of questions - each question is an object
 var questions = [{
     question: "1. What does DOM stand for?",
     choices: ["Directory Of Models", "Document On Middleware", "Data Object Model", "Document Object Model"],
@@ -7,7 +9,7 @@ var questions = [{
     choices: ["Randomly selects an index value in an array", "Returns a number from 0 up to, but not including 10", "Returns a number from 0 up to, but not including 1", "Returns any random number"],
     correctAnswer: 2
 }, {
-    question: "3. Which methods would add an element at the begining of an array, and one at the end of an array?",
+    question: "3. Which two methods would add an element at the begining of an array, and one at the end of an array, respectively?",
     choices: ["push, pop", "unshift, push", "first, push", "unshift, last"],
     correctAnswer: 1
 }, {
@@ -15,8 +17,8 @@ var questions = [{
     choices: ["const string = 'I just created a string'", "const string = (I just created a string)", "string = alert('I just created a string')", "I just created a string = let string"],
     correctAnswer: 0
 }, {
-    question: "5. How would you use string concatenation to create the following string:   Say hello 7 times fast! ",
-    choices: ["'Say hello ' + 7 + ' times fast!'", "'Say hello + 7 + times fast!'", "('Say hello') + '7' + ('times fast!')", "`Say hello (7) times fast!`"],
+    question: "5. Given `const num = 7` - How would you use string concatenation to create the following string:   Say hello 7 times fast! ",
+    choices: ["'Say hello ' + num + ' times fast!'", "'Say hello + num + times fast!'", "('Say hello') + 'num' + ('times fast!')", "`Say hello (num) times fast!`"],
     correctAnswer: 0
 },{
 	question: "6. What is the proper syntax of a basic function?",
@@ -56,7 +58,8 @@ var questions = [{
     correctAnswer: 0
 }];
 
-
+const $answerButton = $('.answerButton');
+$answerButton.hide();
 var currentQuestion = 0;
 var viewingAns = 0;
 var correctAnswers = 0;
@@ -69,11 +72,9 @@ $(document).ready(function ()
     // Display the first question
     displayCurrentQuestion();
     $(this).find(".quizMessage").hide();
-    $(this).find(".preButton").attr('disabled', 'disabled');
-	
 	timedCount();
 	
-	$(this).find(".preButton").on("click", function () 
+	$(this).find('.answerButton').on("click", function () 
 	{		
 		
         if (!quizOver) 
@@ -81,19 +82,21 @@ $(document).ready(function ()
 			if(currentQuestion == 0) { return false; }
 	
 			if(currentQuestion == 1) {
-			  $(".preButton").attr('disabled', 'disabled');
+			  $answerButton.hide();
 			}
 			
 				currentQuestion--; // Since we have already displayed the first question on DOM ready
 				if (currentQuestion < questions.length) 
 				{
 					displayCurrentQuestion();
+					$answerButton.hide();
 					
 				} 					
 		} else {
 			if(viewingAns == 3) { return false; }
 			currentQuestion = 0; viewingAns = 3;
-			viewResults();		
+			viewResults();	
+			$answerButton.show();	
 		}
     });
 
@@ -130,14 +133,15 @@ $(document).ready(function ()
 					displayCurrentQuestion();
 					
 				} 
-				else 
-				{
+				else {
+
+					// Display final score and message, unhide the "view answers" button
 					displayScore();
-					$('#iTimeShow').html('Quiz Time Completed!');
-					$('#timer').html("You scored: " + correctAnswers + " out of: " + questions.length);
-					c=185;
-					$(document).find(".preButton").text("View Answer");
-					$(document).find(".nextButton").text("Play Again?");
+					$('#iTimeShow').html('Quiz Completed! This quiz will self destruct when the timer runs out');
+					$('#timer').html("You scored: " + correctAnswers + " out of " + questions.length);
+					c=900;
+					$answerButton.show();
+					$(document).find(".nextButton").text("Try Again?");
 					quizOver = true;
 					return false;
 					
@@ -149,8 +153,7 @@ $(document).ready(function ()
 		{ // quiz is over and clicked the next button (which now displays 'Play Again?'
 			quizOver = false; $('#iTimeShow').html('Time Remaining:'); iSelectedAnswer = [];
 			$(document).find(".nextButton").text("Next Question");
-			$(document).find(".preButton").text("Previous Question");
-			 $(".preButton").attr('disabled', 'disabled');
+			$answerButton.hide();
 			resetQuiz();
 			viewingAns = 1;
 			displayCurrentQuestion();
@@ -163,7 +166,7 @@ $(document).ready(function ()
 
 function timedCount()
 	{
-		if(c == 365) 
+		if(c == 905) 
 		{ 
 			return false; 
 		}
@@ -175,53 +178,19 @@ function timedCount()
 		$('#timer').html(result);
 		
 		if(c == 0 )
-		{
+		{			// Ends game if timer runs out
 					displayScore();
-					$('#iTimeShow').html('Quiz Time Completed!');
-					$('#timer').html("You scored: " + correctAnswers + " out of: " + questions.length);
-					c=0;
-					$(document).find(".preButton").text("View Answer");
-					$(document).find(".nextButton").text("Play Again?");
+					$('#iTimeShow').html('Quiz Time Is Up! This quiz will self destruct when the timer runs out');
+					$('#timer').html("You scored: " + correctAnswers + " out of " + questions.length);
+					c=900;
+					$('#timer').html(result);
+					$answerButton.show();
+					$(document).find(".nextButton").text("Try Again?");
 					quizOver = true;
 					return false;
 					
 		}
 		
-		/*if(c == 0 )
-		{	
-			if (!quizOver) 
-			{
-				var val = $("input[type='radio']:checked").val();
-            	if (val == questions[currentQuestion].correctAnswer) 
-				{
-					correctAnswers++;
-				}
-				currentQuestion++; // Since we have already displayed the first question on DOM ready
-				
-				if (currentQuestion < questions.length) 
-				{
-					displayCurrentQuestion();
-					c=15;
-				} 
-				else 
-				{
-					displayScore();
-					$('#timer').html('');
-					c=16;
-					$(document).find(".nextButton").text("Play Again?");
-					quizOver = true;
-					return false;
-				}
-			}
-			else 
-			{ // quiz is over and clicked the next button (which now displays 'Play Again?'
-				quizOver = false;
-				$(document).find(".nextButton").text("Next Question");
-				resetQuiz();
-				displayCurrentQuestion();
-				hideScore();
-			}		
-		}	*/
 		c = c - 1;
 		t = setTimeout(function()
 		{
@@ -263,13 +232,16 @@ function resetQuiz()
 {
     currentQuestion = 0;
     correctAnswers = 0;
-    hideScore();
+	hideScore();
+	c = 360;
+	//$answerButton.hide();
 }
 
 function displayScore()
 {
     $(document).find(".quizContainer > .result").text("You scored: " + correctAnswers + " out of: " + questions.length);
-    $(document).find(".quizContainer > .result").show();
+	$(document).find(".quizContainer > .result").show();
+	$answerButton.show();
 }
 
 function hideScore() 
@@ -295,7 +267,7 @@ function viewResults()
     $(choiceList).find("li").remove();
     var choice;
 	
-	
+	// Showing answers - Each answer shows for 6 seconds before moving on to next answer
 	for (i = 0; i < numChoices; i++) 
 	{
         choice = questions[currentQuestion].choices[i];

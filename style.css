@@ -1,13 +1,27 @@
+body {
+    background: black;
+}
+
 h1 {
     font-family:'Gabriola', serif;
     text-align: center;
 }
+
+h2{
+    color: white;
+}
+
+h3{
+    color: white;
+}
+
 ul {
     list-style: none;
 }
 li {
     font-family:'Cambria', serif;
     font-size: 1.5em;
+    color: #f3dc45
 }
 input[type=radio] {
     border: 0px;
@@ -20,16 +34,20 @@ p {
 
 #iTimeShow{
 text-align: right;
-color: red;
+color: rgb(250, 4, 4);
 
 }
 
 #timer{
-    color: red;
+    color: rgb(250, 4, 4);
+}
+
+#player{
+    background: lightgray;
 }
 /* Quiz Classes */
  .quizContainer {
-    background-color: white;
+    background-color: black;
     border-radius: 6px;
     width: 75%;
     margin: auto;
@@ -47,12 +65,13 @@ font-family:"Georgia", Arial, sans-serif;
 .nextButton {
     box-shadow: 3px 3px 5px #888;
     border-radius: 6px;
+    border-color: #f3dc45;
    /* width: 150px;*/
     height: 40px;
     text-align: center;
     background-color: lightgrey;
     /*clear: both;*/
-    color: red;
+    color: black;
     font-family:'Gabriola', serif;
     position: relative;
     margin: auto;
@@ -63,15 +82,16 @@ font-family:"Georgia", Arial, sans-serif;
 	right:30%;
 }
 
-.preButton {
+.answerButton {
     box-shadow: 3px 3px 5px #888;
     border-radius: 6px;
+    border-color: #f3dc45;
     /*width: 150px;*/
     height: 40px;
     text-align: center;
     background-color: lightgrey;
     /*clear: both;*/
-    color: red;
+    color: black;
     font-family:'Gabriola', serif;
     position: relative;
     margin: auto;
@@ -120,7 +140,7 @@ font-family:"Georgia", Arial, sans-serif;
     border-radius: 6px;
     background-color: linen;
     margin: auto;
-	color:green;
+	color:#4a7914;
     text-align: center;
 	font-size:25px;
     font-family:'Verdana', serif;
