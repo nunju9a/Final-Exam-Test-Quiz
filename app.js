@@ -56,7 +56,35 @@ var questions = [{
 	question: "10. Which of the following is an example of an object literal?",
     choices: ["const literal = { property: 'string'}", "const literal = property(string) =>", "const literal = [property: 'string']", "const {literal} = [string property]"],
     correctAnswer: 0
-}];
+}, {
+	question: "11. What keyword would you use to select data by descending order?",
+    choices: ["Down", "Read", "Descending", "Desc"],
+    correctAnswer: 3
+}, {
+	question: "12. What is pug used for?",
+    choices: ["A component in React that assists with routes", "A template engine that compiles and renders HTML", "A place to store static files in Express", "Cute puppy memes"],
+    correctAnswer: 1
+},  {
+	question: "13. Which code sets up middleware in Express?",
+    choices: ["app.set", "app.use", "app.get", "app.post"],
+    correctAnswer: 1
+}, {
+	question: "14. What happens when you run `npm install` in the terminal?",
+    choices: ["Node will be installed on your machine", "The app will begin to run", "Any project dependencies listed in the package.json file will be installed", "Views and Public folders will be created"],
+    correctAnswer: 2
+}, {
+	question: "15. Which variable declaration should be the first choice?",
+    choices: ["let", "var", "function", "const"],
+    correctAnswer: 3
+}, {
+	question: "16. What is the difference between a local variable and a global variable?",
+    choices: ["Local variables are accessible anywhere in your code, global variables only exist inside of a function ", "Global variables are defined with a const, local variables are defined with a let", "Locally defined variables can change the value of a global variables", "Global variables are accessible anywhere in your code, local variables only exist inside of a function"],
+    correctAnswer: 3
+}, {
+	question: "17. Which of the following will show an alert when the user clicks on an element?",
+    choices: [`element.addEventListener("click", function(){ alert("Hello World!") })`, `addEventListener.element("click", function(){ alert("Hello World!") })`, `element.onSubmit("onlick", alert("Hello World!"))`, `alert("Hello World").click`],
+    correctAnswer: 0
+},];
 
 const $answerButton = $('.answerButton');
 $answerButton.hide();
@@ -65,7 +93,7 @@ var viewingAns = 0;
 var correctAnswers = 0;
 var quizOver = false;
 var iSelectedAnswer = [];
-	var c=360;
+	var c=900;
 	var t;
 $(document).ready(function () 
 {
@@ -203,7 +231,7 @@ function timedCount()
 function displayCurrentQuestion() 
 {
 
-	if(c == 365) { c = 360; timedCount(); }
+	if(c == 905) { c = 900; timedCount(); }
     //console.log("In display current Question");
     var question = questions[currentQuestion].question;
     var questionClass = $(document).find(".quizContainer > .question");
@@ -233,7 +261,7 @@ function resetQuiz()
     currentQuestion = 0;
     correctAnswers = 0;
 	hideScore();
-	c = 360;
+	c = 900;
 	//$answerButton.hide();
 }
 
@@ -253,7 +281,7 @@ function hideScore()
 function viewResults() 
 {
 
-	if(currentQuestion == 10) { currentQuestion = 0;return false; }
+	if(currentQuestion == 20) { currentQuestion = 0;return false; }
 	if(viewingAns == 1) { return false; }
 
 	hideScore();
