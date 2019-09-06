@@ -73,7 +73,7 @@ var questions = [{
     choices: ["Node will be installed on your machine", "The app will begin to run", "Any project dependencies listed in the package.json file will be installed", "Views and Public folders will be created"],
     correctAnswer: 2
 }, {
-	question: "15. Which variable declaration should be the first choice?",
+	question: "15. Which variable declaration should be the first option to consider?",
     choices: ["let", "var", "function", "const"],
     correctAnswer: 3
 }, {
@@ -82,8 +82,20 @@ var questions = [{
     correctAnswer: 3
 }, {
 	question: "17. Which of the following will show an alert when the user clicks on an element?",
-    choices: [`element.addEventListener("click", function(){ alert("Hello World!") })`, `addEventListener.element("click", function(){ alert("Hello World!") })`, `element.onSubmit("onlick", alert("Hello World!"))`, `alert("Hello World").click`],
+    choices: [`element.addEventListener("click", function(){ alert("Hello World!") })`, `addEventListener.element("click", alert("Hello World!") )`, `element.onSubmit("onlick", alert("Hello World!"))`, `alert("Hello World").click`],
     correctAnswer: 0
+}, {
+	question: "18. What does IIFE stand for?",
+    choices: ["Instantly Instantiated Function Expressions", "Immediate If Statement Expression", "Immediate Instant Function Express", "Immediately Invoked Function Expression"],
+    correctAnswer: 3
+}, {
+	question: "19. What is DOM traversal?",
+    choices: ["Appending DOM elements", "Updating the DOM memory with functions", "Finding variables inside of local functions within the DOM", "Navigating up and down the DOM tree"],
+    correctAnswer: 3
+}, {
+	question: "20. Which code properly references a module that is in a separate file?",
+    choices: ["const require = 'myModule'", "const myModule = require('myModule')", "const myModule = express.require[myModule]", "require().myModule"],
+    correctAnswer: 1
 },];
 
 const $answerButton = $('.answerButton');
